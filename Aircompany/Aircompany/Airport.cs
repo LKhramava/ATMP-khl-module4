@@ -7,34 +7,32 @@ namespace Aircompany
 {
     public class Airport
     {
-        public List<Plane> Planes { get; set; }
+        public IEnumerable<Plane> Planes { get; set; }
 
-        public List<PassengerPlane> GetPassengersPlanes()
+        public IEnumerable<PassengerPlane> GetPassengersPlanes()
         {
-            return Planes.Where(plane => plane.GetType() == typeof(PassengerPlane)).Select(plane => plane as PassengerPlane).ToList();
+            return Planes.OfType<PassengerPlane>();
         }
 
-        public List<MilitaryPlane> GetMilitaryPlanes()
+        public IEnumerable<MilitaryPlane> GetMilitaryPlanes()
         {
-            return Planes.Where(plane => plane is MilitaryPlane).Select(plane => plane as MilitaryPlane).ToList();
+            return Planes.OfType<MilitaryPlane>();
         }
 
         public PassengerPlane GetPassengerPlaneWithMaxPassengersCapacity()
         {
-            List<PassengerPlane> passengerPlanes = GetPassengersPlanes();
-            var maxPassengerCapacity = passengerPlanes.Max(plane => plane.PassengersCapacity);
-            return passengerPlanes.First(x => x.PassengersCapacity == maxPassengerCapacity);
+            return GetPassengersPlanes().OrderBy(x => x.PassengersCapacity).Last();
         }
 
-        public List<MilitaryPlane> GetTransportMilitaryPlanes()
+        public IEnumerable<MilitaryPlane> GetTransportMilitaryPlanes()
         {
-            return Planes.Where(plane => plane is MilitaryPlane && ((MilitaryPlane)plane).Type == MilitaryType.Transport).Select(plane => plane as MilitaryPlane).ToList();
+            return GetMilitaryPlanes().Where(plane => plane.Type == MilitaryTypes.Transport);
         }
         public Airport SortByMaxDistance()
         {
             return new Airport
             {
-                Planes = Planes.OrderBy(w => w.MaxFlightDistance).ToList(),
+                Planes = Planes.OrderBy(w => w.MaxFlightDistance),
             };
         }
 
@@ -42,7 +40,7 @@ namespace Aircompany
         {
             return new Airport
             {
-                Planes = Planes.OrderBy(w => w.MaxSpeed).ToList()
+                Planes = Planes.OrderBy(w => w.MaxSpeed)
             };
         }
 
@@ -50,7 +48,7 @@ namespace Aircompany
         {
             return new Airport
             {
-                Planes = Planes.OrderBy(w => w.MaxLoadCapacity).ToList()
+                Planes = Planes.OrderBy(w => w.MaxLoadCapacity)
             };
         }
 

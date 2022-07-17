@@ -4,11 +4,21 @@ namespace Aircompany.Planes
 {
     public class MilitaryPlane : Plane
     {
-        public MilitaryType Type { get; set; }
+        public MilitaryTypes Type { get; set; }
+
+        public MilitaryPlane() {}
+
+        public MilitaryPlane(string model, int maxSpeed, int maxFlightDistance, int maxLoadCapacity, MilitaryTypes type)
+            : base(model, maxSpeed, maxFlightDistance, maxLoadCapacity)
+        {
+            Type = type;
+        }
 
         public override bool Equals(object obj)
         {
-            return (obj is MilitaryPlane plane && base.Equals(obj) && Type.Equals(plane.Type));
+            return (obj is MilitaryPlane plane &&
+                    base.Equals(obj) &&
+                    Type.Equals(plane.Type));
         }
 
         public override int GetHashCode()

@@ -81,7 +81,7 @@ namespace AircompanyTests.Tests
                 MaxSpeed = 1050,
                 MaxFlightDistance = 21000,
                 MaxLoadCapacity = 80000,
-                Type = MilitaryType.Bomber
+                Type = MilitaryTypes.Bomber
             },
             new MilitaryPlane
             {
@@ -89,7 +89,7 @@ namespace AircompanyTests.Tests
                 MaxSpeed = 1030,
                 MaxFlightDistance = 22000,
                 MaxLoadCapacity = 70000,
-                Type = MilitaryType.Bomber
+                Type = MilitaryTypes.Bomber
             },
             new MilitaryPlane
             {
@@ -97,7 +97,7 @@ namespace AircompanyTests.Tests
                 MaxSpeed = 1000,
                 MaxFlightDistance = 20000,
                 MaxLoadCapacity = 80000,
-                Type = MilitaryType.Bomber
+                Type = MilitaryTypes.Bomber
             },
             new MilitaryPlane
             {
@@ -105,7 +105,7 @@ namespace AircompanyTests.Tests
                 MaxSpeed = 1500,
                 MaxFlightDistance = 12000,
                 MaxLoadCapacity = 10000,
-                Type = MilitaryType.Fighter
+                Type = MilitaryTypes.Fighter
             },
             new MilitaryPlane
             {
@@ -113,7 +113,7 @@ namespace AircompanyTests.Tests
                 MaxSpeed = 1550,
                 MaxFlightDistance = 13000,
                 MaxLoadCapacity = 11000,
-                Type = MilitaryType.Fighter
+                Type = MilitaryTypes.Fighter
             },
             new MilitaryPlane
             {
@@ -121,7 +121,7 @@ namespace AircompanyTests.Tests
                 MaxSpeed = 650,
                 MaxFlightDistance = 5000,
                 MaxLoadCapacity = 110000,
-                Type = MilitaryType.Transport
+                Type = MilitaryTypes.Transport
             }
     };
 
@@ -141,8 +141,8 @@ namespace AircompanyTests.Tests
             {
                 Planes = planes
             };
-            List<MilitaryPlane> transportMilitaryPlanes = airport.GetTransportMilitaryPlanes().ToList();
-            var hasMilitaryTransportPlane = transportMilitaryPlanes.Any(x => x.Type.Equals(MilitaryType.Transport));
+            var transportMilitaryPlanes = airport.GetTransportMilitaryPlanes();
+            var hasMilitaryTransportPlane = transportMilitaryPlanes.Any(x => x.Type.Equals(MilitaryTypes.Transport));
 
             Assert.IsTrue(hasMilitaryTransportPlane);
         }
@@ -155,7 +155,7 @@ namespace AircompanyTests.Tests
                 Planes = planes
             };
 
-            PassengerPlane actualPlaneWithMaxPassengersCapacity = airport.GetPassengerPlaneWithMaxPassengersCapacity();
+            var actualPlaneWithMaxPassengersCapacity = airport.GetPassengerPlaneWithMaxPassengersCapacity();
             Assert.AreEqual(planeWithMaxPassengerCapacity, actualPlaneWithMaxPassengersCapacity);
         }
 
@@ -167,7 +167,7 @@ namespace AircompanyTests.Tests
                 Planes = planes
             };
             airport = airport.SortByMaxLoadCapacity();
-            List<Plane> planesSortedByMaxLoadCapacity = airport.Planes.ToList();
+            var planesSortedByMaxLoadCapacity = airport.Planes.ToList();
 
             bool nextPlaneMaxLoadCapacityIsHigherThanCurrent = true;
             for (int i = 0; i < planesSortedByMaxLoadCapacity.Count - 1; i++)

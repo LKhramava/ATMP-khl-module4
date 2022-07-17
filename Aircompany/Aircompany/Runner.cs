@@ -78,7 +78,7 @@ namespace Aircompany
                 MaxSpeed = 1050,
                 MaxFlightDistance = 21000,
                 MaxLoadCapacity = 80000,
-                Type = MilitaryType.Bomber
+                Type = MilitaryTypes.Bomber
             },
             new MilitaryPlane
             {
@@ -86,7 +86,7 @@ namespace Aircompany
                 MaxSpeed = 1030,
                 MaxFlightDistance = 22000,
                 MaxLoadCapacity = 70000,
-                Type = MilitaryType.Bomber
+                Type = MilitaryTypes.Bomber
             },
             new MilitaryPlane
             {
@@ -94,7 +94,7 @@ namespace Aircompany
                 MaxSpeed = 1000,
                 MaxFlightDistance = 20000,
                 MaxLoadCapacity = 80000,
-                Type = MilitaryType.Bomber
+                Type = MilitaryTypes.Bomber
             },
             new MilitaryPlane
             {
@@ -102,7 +102,7 @@ namespace Aircompany
                 MaxSpeed = 1500,
                 MaxFlightDistance = 12000,
                 MaxLoadCapacity = 10000,
-                Type = MilitaryType.Fighter
+                Type = MilitaryTypes.Fighter
             },
             new MilitaryPlane
             {
@@ -110,7 +110,7 @@ namespace Aircompany
                 MaxSpeed = 1550,
                 MaxFlightDistance = 13000,
                 MaxLoadCapacity = 11000,
-                Type = MilitaryType.Fighter
+                Type = MilitaryTypes.Fighter
             },
             new MilitaryPlane
             {
@@ -118,7 +118,7 @@ namespace Aircompany
                 MaxSpeed = 650,
                 MaxFlightDistance = 5000,
                 MaxLoadCapacity = 110000,
-                Type = MilitaryType.Transport
+                Type = MilitaryTypes.Transport
             }
     };
         public static void Main(string[] args)
@@ -129,11 +129,11 @@ namespace Aircompany
             };
             Airport militaryAirport = new Airport
             {
-                Planes = new List<Plane>(airport.GetMilitaryPlanes())
+                Planes = airport.GetMilitaryPlanes()
             };
             Airport passengerAirport = new Airport
             {
-                Planes = new List<Plane>(airport.GetPassengersPlanes())
+                Planes = airport.GetPassengersPlanes()
             };
             Console.WriteLine(militaryAirport.SortByMaxDistance().ToString());
             Console.WriteLine(passengerAirport.SortByMaxSpeed().ToString());

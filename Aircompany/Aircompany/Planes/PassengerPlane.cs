@@ -4,9 +4,19 @@
     {
         public int PassengersCapacity { get; set; }
 
+        public PassengerPlane() {}
+
+        public PassengerPlane(string model, int maxSpeed, int maxFlightDistance, int maxLoadCapacity, int passengersCapacity)
+            : base(model, maxSpeed, maxFlightDistance, maxLoadCapacity)
+        {
+            PassengersCapacity = passengersCapacity;
+        }
+
         public override bool Equals(object obj)
         {
-            return (obj is PassengerPlane plane && base.Equals(obj) && PassengersCapacity.Equals(plane.PassengersCapacity));
+            return (obj is PassengerPlane plane &&
+                    base.Equals(obj) &&
+                    PassengersCapacity.Equals(plane.PassengersCapacity));
         }
 
         public override int GetHashCode()
